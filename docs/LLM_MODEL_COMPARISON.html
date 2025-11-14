@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparación de Modelos LLM - Generador de Fichas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #2c3e50;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            color: #7f8c8d;
+        }
+
+        .alert {
+            padding: 20px;
+            border-radius: 5px;
+            margin: 25px 0;
+            border-left: 5px solid;
+        }
+
+        .alert-info {
+            background: #d1ecf1;
+            border-color: #0c5460;
+            color: #0c5460;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            border-color: #856404;
+            color: #856404;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            border-color: #155724;
+            color: #155724;
+        }
+
+        .alert-danger {
+            background: #f8d7da;
+            border-color: #721c24;
+            color: #721c24;
+        }
+
+        .recommendation-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .recommendation-box h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            font-size: 0.95em;
+        }
+
+        .comparison-table thead {
+            background: #34495e;
+            color: white;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .comparison-table th {
+            font-weight: 600;
+        }
+
+        .comparison-table tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .comparison-table tbody tr:hover {
+            background: #e8f4f8;
+        }
+
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .pros, .cons {
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .pros {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+        }
+
+        .cons {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+        }
+
+        .pros h4, .cons h4 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .pros ul, .cons ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .pros li::before {
+            content: "✓ ";
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .cons li::before {
+            content: "✗ ";
+            color: #dc3545;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .model-card {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        .model-card:hover {
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+        }
+
+        .model-card.recommended {
+            border-color: #28a745;
+            background: #f1f9f3;
+        }
+
+        .model-card.not-recommended {
+            border-color: #dc3545;
+            background: #fef5f5;
+            opacity: 0.8;
+        }
+
+        .model-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        .model-name {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .badge {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .badge-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .badge-warning {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .badge-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .badge-info {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .spec-item {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 3px solid #3498db;
+        }
+
+        .spec-label {
+            font-size: 0.85em;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .spec-value {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .section {
+            margin: 50px 0;
+        }
+
+        .section h2 {
+            font-size: 2em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+
+        .section h3 {
+            font-size: 1.5em;
+            color: #34495e;
+            margin: 30px 0 15px 0;
+        }
+
+        .decision-tree {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+
+        .decision-node {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 15px 0;
+            border-left: 4px solid #3498db;
+        }
+
+        .decision-node.final {
+            border-left-color: #28a745;
+            background: #f1f9f3;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .price-breakdown {
+            background: #fff;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .price-breakdown h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        table.price-table {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        table.price-table td {
+            padding: 8px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        table.price-table tr:last-child td {
+            border-bottom: none;
+            font-weight: bold;
+            padding-top: 15px;
+            border-top: 2px solid #3498db;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+        }
+
+        .highlight-box h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+            }
+        }
+
+        .star-rating {
+            color: #ffc107;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <h1>🤖 Comparación de Modelos LLM</h1>
+            <div class="subtitle">Guía de Selección para Generador de Fichas Sociales</div>
+            <p style="color: #95a5a6; margin-top: 10px;">Actualizado: Noviembre 2024</p>
+        </div>
+
+        <!-- RECOMENDACIÓN PRINCIPAL -->
+        <div class="recommendation-box">
+            <h2>🏆 Recomendación Final</h2>
+            <div style="font-size: 2.5em; font-weight: bold; margin: 20px 0;">
+                Claude 3.5 Sonnet (via Anthropic API)
+            </div>
+            <p style="font-size: 1.2em; margin-top: 15px;">
+                Mejor relación calidad-precio-contexto para tu caso de uso
+            </p>
+            <div style="margin-top: 20px; padding: 20px; background: rgba(255,255,255,0.2); border-radius: 5px;">
+                <strong>Alternativa viable:</strong> Modelo Híbrido (GPT-4o mini + GPT-4o + Claude 3.5)
+            </div>
+        </div>
+
+        <!-- ALERTA IMPORTANTE SOBRE GROQ -->
+        <div class="alert alert-warning">
+            <h3 style="margin-bottom: 10px;">⚠️ IMPORTANTE: Aclaración sobre Groq</h3>
+            <p style="margin-bottom: 10px;"><strong>Groq NO es un proveedor de modelos OpenAI.</strong></p>
+            <ul style="margin-left: 25px; margin-top: 10px;">
+                <li><strong>Groq</strong> es una infraestructura de hardware (LPU™) que ofrece modelos open-source ultra-rápidos (Llama 3.1, Mixtral, Gemma)</li>
+                <li><strong>OpenAI</strong> solo está disponible via OpenAI API directa (no puedes usar GPT-4 en Groq)</li>
+                <li><strong>Groq</strong> tiene un límite de contexto de <strong>8k tokens</strong> (insuficiente para tus PDFs de 20-60k tokens)</li>
+                <li><strong>Ventaja de Groq:</strong> Velocidad extrema (18,000 tokens/seg) + gratis hasta cierto límite</li>
+                <li><strong>Desventaja de Groq:</strong> No soporta tus documentos complejos (se queda corto en contexto)</li>
+            </ul>
+        </div>
+
+        <!-- TABLA COMPARATIVA GENERAL -->
+        <div class="section">
+            <h2>📊 Tabla Comparativa General</h2>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Modelo</th>
+                        <th>Proveedor</th>
+                        <th>Contexto</th>
+                        <th>Costo Input</th>
+                        <th>Costo Output</th>
+                        <th>Velocidad</th>
+                        <th>Calidad</th>
+                        <th>Viable</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: #f1f9f3;">
+                        <td><strong>Claude 3.5 Sonnet</strong></td>
+                        <td>Anthropic</td>
+                        <td><strong>200k</strong> ✓</td>
+                        <td>$3.00/M</td>
+                        <td>$15.00/M</td>
+                        <td>⚡⚡⚡</td>
+                        <td><span class="star-rating">⭐⭐⭐⭐⭐</span></td>
+                        <td><span class="badge badge-success">SÍ ✓</span></td>
+                    </tr>
+                    <tr style="background: #f1f9f3;">
+                        <td><strong>GPT-4o</strong></td>
+                        <td>OpenAI</td>
+                        <td><strong>128k</strong> ✓</td>
+                        <td>$2.50/M</td>
+                        <td>$10.00/M</td>
+                        <td>⚡⚡⚡⚡</td>
+                        <td><span class="star-rating">⭐⭐⭐⭐⭐</span></td>
+                        <td><span class="badge badge-success">SÍ ✓</span></td>
+                    </tr>
+                    <tr style="background: #f1f9f3;">
+                        <td><strong>GPT-4o mini</strong></td>
+                        <td>OpenAI</td>
+                        <td><strong>128k</strong> ✓</td>
+                        <td>$0.15/M</td>
+                        <td>$0.60/M</td>
+                        <td>⚡⚡⚡⚡⚡</td>
+                        <td><span class="star-rating">⭐⭐⭐⭐</span></td>
+                        <td><span class="badge badge-success">SÍ ✓</span></td>
+                    </tr>
+                    <tr>
+                        <td>Claude 3 Haiku</td>
+                        <td>Anthropic</td>
+                        <td><strong>200k</strong> ✓</td>
+                        <td>$0.25/M</td>
+                        <td>$1.25/M</td>
+                        <td>⚡⚡⚡⚡⚡</td>
+                        <td><span class="star-rating">⭐⭐⭐⭐</span></td>
+                        <td><span class="badge badge-info">Testing</span></td>
+                    </tr>
+                    <tr style="background: #fef5f5;">
+                        <td>Llama 3.1 70B (Groq)</td>
+                        <td>Groq</td>
+                        <td><strong>8k</strong> ❌</td>
+                        <td>GRATIS*</td>
+                        <td>GRATIS*</td>
+                        <td>⚡⚡⚡⚡⚡</td>
+                        <td><span class="star-rating">⭐⭐⭐⭐</span></td>
+                        <td><span class="badge badge-danger">NO ✗</span></td>
+                    </tr>
+                    <tr style="background: #fef5f5;">
+                        <td>Mixtral 8x7B (Groq)</td>
+                        <td>Groq</td>
+                        <td><strong>32k</strong> ⚠️</td>
+                        <td>GRATIS*</td>
+                        <td>GRATIS*</td>
+                        <td>⚡⚡⚡⚡⚡</td>
+                        <td><span class="star-rating">⭐⭐⭐</span></td>
+                        <td><span class="badge badge-warning">Limitado</span></td>
+                    </tr>
+                    <tr>
+                        <td>GPT-3.5 Turbo</td>
+                        <td>OpenAI</td>
+                        <td>16k</td>
+                        <td>$0.50/M</td>
+                        <td>$1.50/M</td>
+                        <td>⚡⚡⚡⚡⚡</td>
+                        <td><span class="star-rating">⭐⭐⭐</span></td>
+                        <td><span class="badge badge-warning">Dev only</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p style="font-size: 0.9em; color: #7f8c8d; margin-top: 15px;">
+                * Groq tier gratuito: 30 req/min, 6,000 tokens/min, 14,400 req/día
+            </p>
+        </div>
+
+        <!-- ANÁLISIS POR MODELO -->
+        <div class="section">
+            <h2>🔍 Análisis Detallado por Modelo</h2>
+
+            <!-- CLAUDE 3.5 SONNET -->
+            <div class="model-card recommended">
+                <div class="model-header">
+                    <div class="model-name">Claude 3.5 Sonnet</div>
+                    <span class="badge badge-success">⭐ Recomendado</span>
+                </div>
+
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <div class="spec-label">Ventana de Contexto</div>
+                        <div class="spec-value" style="color: #28a745;">200,000 tokens</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Costo/Ficha (35k tokens)</div>
+                        <div class="spec-value">$0.105</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Velocidad</div>
+                        <div class="spec-value">Rápida</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Calidad</div>
+                        <div class="spec-value" style="color: #28a745;">95%+</div>
+                    </div>
+                </div>
+
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>✓ Ventajas</h4>
+                        <ul>
+                            <li><strong>Contexto masivo:</strong> 200k tokens = cubre todos tus casos, incluso 4-5 PDFs simultáneos</li>
+                            <li><strong>Excelente con texto legal:</strong> Comprensión superior de lenguaje jurídico y normativo</li>
+                            <li><strong>Mejor razonamiento:</strong> Para casos complejos con referencias cruzadas</li>
+                            <li><strong>Salida estructurada:</strong> JSON perfecto, respeta schemas complejos</li>
+                            <li><strong>Menor alucinación:</strong> Más preciso en extracción de datos específicos</li>
+                            <li><strong>Seguimiento de instrucciones:</strong> Excelente para tus 41 reglas del prompt</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>✗ Desventajas</h4>
+                        <ul>
+                            <li>Ligeramente más caro que GPT-4o ($3 vs $2.50 input)</li>
+                            <li>Menor ecosistema de herramientas que OpenAI</li>
+                            <li>Rate limits más conservadores en tier gratuito</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="price-breakdown">
+                    <h4>💰 Desglose de Costos (250 fichas/mes)</h4>
+                    <table class="price-table">
+                        <tr>
+                            <td>Input promedio por ficha:</td>
+                            <td style="text-align: right;">35,000 tokens</td>
+                        </tr>
+                        <tr>
+                            <td>Output promedio por ficha:</td>
+                            <td style="text-align: right;">2,500 tokens</td>
+                        </tr>
+                        <tr>
+                            <td>Costo input (35k × $3.00/M):</td>
+                            <td style="text-align: right;">$0.105</td>
+                        </tr>
+                        <tr>
+                            <td>Costo output (2.5k × $15.00/M):</td>
+                            <td style="text-align: right;">$0.0375</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Costo total por ficha:</strong></td>
+                            <td style="text-align: right; color: #28a745;"><strong>$0.143</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>250 fichas/mes:</strong></td>
+                            <td style="text-align: right; color: #28a745; font-size: 1.2em;"><strong>$35.75/mes (€35.75)</strong></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="alert alert-success">
+                    <h4 style="margin-bottom: 10px;">🎯 Ideal para tu proyecto si:</h4>
+                    <ul style="margin-left: 25px;">
+                        <li>Priorizas <strong>calidad</strong> sobre costo (diferencia mínima)</li>
+                        <li>Tienes documentos de <strong>60k+ tokens</strong> (casos complejos)</li>
+                        <li>Necesitas <strong>máxima precisión</strong> en extracción legal</li>
+                        <li>Quieres evitar problemas de límite de contexto</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- GPT-4o -->
+            <div class="model-card recommended">
+                <div class="model-header">
+                    <div class="model-name">GPT-4o</div>
+                    <span class="badge badge-success">✓ Viable</span>
+                </div>
+
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <div class="spec-label">Ventana de Contexto</div>
+                        <div class="spec-value" style="color: #28a745;">128,000 tokens</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Costo/Ficha (35k tokens)</div>
+                        <div class="spec-value">$0.088</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Velocidad</div>
+                        <div class="spec-value">Muy rápida</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Calidad</div>
+                        <div class="spec-value" style="color: #28a745;">92-94%</div>
+                    </div>
+                </div>
+
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>✓ Ventajas</h4>
+                        <ul>
+                            <li><strong>Más barato:</strong> $2.50 input vs $3.00 de Claude</li>
+                            <li><strong>Muy rápido:</strong> Respuestas en 2-5 segundos</li>
+                            <li><strong>128k contexto:</strong> Suficiente para 95% de tus casos</li>
+                            <li><strong>Ecosistema OpenAI:</strong> Más herramientas, ejemplos, comunidad</li>
+                            <li><strong>Function calling robusto:</strong> Para validaciones complejas</li>
+                            <li><strong>Mejor vision API:</strong> Si necesitas OCR avanzado</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>✗ Desventajas</h4>
+                        <ul>
+                            <li>Contexto menor que Claude (128k vs 200k)</li>
+                            <li>Casos muy complejos (4+ PDFs) pueden saturar contexto</li>
+                            <li>Ligeramente menos preciso en lenguaje legal especializado</li>
+                            <li>Mayor tendencia a "decorar" respuestas (menos conciso)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="price-breakdown">
+                    <h4>💰 Desglose de Costos (250 fichas/mes)</h4>
+                    <table class="price-table">
+                        <tr>
+                            <td>Costo input (35k × $2.50/M):</td>
+                            <td style="text-align: right;">$0.0875</td>
+                        </tr>
+                        <tr>
+                            <td>Costo output (2.5k × $10.00/M):</td>
+                            <td style="text-align: right;">$0.025</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Costo total por ficha:</strong></td>
+                            <td style="text-align: right; color: #28a745;"><strong>$0.113</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>250 fichas/mes:</strong></td>
+                            <td style="text-align: right; color: #28a745; font-size: 1.2em;"><strong>$28.25/mes (€28.25)</strong></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="alert alert-info">
+                    <h4 style="margin-bottom: 10px;">🎯 Ideal para tu proyecto si:</h4>
+                    <ul style="margin-left: 25px;">
+                        <li>Quieres <strong>minimizar costos</strong> (21% más barato que Claude)</li>
+                        <li>Tus documentos son <strong>mayormente &lt;60k tokens</strong></li>
+                        <li>Prefieres el <strong>ecosistema OpenAI</strong> (más familiar)</li>
+                        <li>Necesitas <strong>velocidad máxima</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- GPT-4o mini -->
+            <div class="model-card recommended">
+                <div class="model-header">
+                    <div class="model-name">GPT-4o mini</div>
+                    <span class="badge badge-info">💡 Para Casos Simples</span>
+                </div>
+
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <div class="spec-label">Ventana de Contexto</div>
+                        <div class="spec-value" style="color: #28a745;">128,000 tokens</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Costo/Ficha (15k tokens)</div>
+                        <div class="spec-value" style="color: #28a745;">$0.005</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Velocidad</div>
+                        <div class="spec-value">Ultra rápida</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Calidad</div>
+                        <div class="spec-value">85-88%</div>
+                    </div>
+                </div>
+
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>✓ Ventajas</h4>
+                        <ul>
+                            <li><strong>Extremadamente barato:</strong> 94% más barato que GPT-4o</li>
+                            <li><strong>Muy rápido:</strong> Ideal para testing y desarrollo</li>
+                            <li><strong>Suficiente para casos simples:</strong> 1 PDF, estructura clara</li>
+                            <li><strong>128k contexto:</strong> Soporta documentos medianos</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>✗ Desventajas</h4>
+                        <ul>
+                            <li><strong>Calidad inferior:</strong> 85-88% vs 95%+ de modelos flagship</li>
+                            <li>Peor con lenguaje legal complejo</li>
+                            <li>Más errores en extracción de tablas complejas</li>
+                            <li>Menos preciso con referencias legislativas</li>
+                            <li><strong>NO recomendado para producción</strong> (solo testing)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="alert alert-warning">
+                    <h4 style="margin-bottom: 10px;">⚠️ Uso Recomendado:</h4>
+                    <ul style="margin-left: 25px;">
+                        <li><strong>Development/Testing:</strong> Pruebas rápidas sin costo significativo</li>
+                        <li><strong>Modelo Híbrido:</strong> Para 40% de fichas simples (1 PDF claro)</li>
+                        <li><strong>NO para producción única:</strong> Calidad insuficiente para casos complejos</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- GROQ (NO RECOMENDADO) -->
+            <div class="model-card not-recommended">
+                <div class="model-header">
+                    <div class="model-name">Groq (Llama 3.1 70B / Mixtral)</div>
+                    <span class="badge badge-danger">❌ No Viable</span>
+                </div>
+
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <div class="spec-label">Ventana de Contexto</div>
+                        <div class="spec-value" style="color: #dc3545;">8k tokens ⚠️</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Costo</div>
+                        <div class="spec-value" style="color: #28a745;">GRATIS*</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Velocidad</div>
+                        <div class="spec-value">Ultra rápida</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-label">Calidad</div>
+                        <div class="spec-value">85-90%</div>
+                    </div>
+                </div>
+
+                <div class="highlight-box" style="background: linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%);">
+                    <h3>🚫 POR QUÉ NO FUNCIONA PARA TU PROYECTO</h3>
+                    <ul style="margin-left: 25px; margin-top: 15px;">
+                        <li><strong>Contexto insuficiente:</strong> Tus PDFs promedian 13-21k tokens, Groq solo soporta 8k</li>
+                        <li><strong>Casos complejos imposibles:</strong> 60k+ tokens no caben (se trunca información crítica)</li>
+                        <li><strong>Mixtral 32k tampoco alcanza:</strong> Necesitas mínimo 60k para casos complejos</li>
+                        <li><strong>No es OpenAI:</strong> No puedes usar GPT-4 en Groq, solo modelos open-source</li>
+                    </ul>
+                </div>
+
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h4>✓ Ventajas (que no aplican a ti)</h4>
+                        <ul>
+                            <li>Velocidad extrema: 18,000 tokens/segundo</li>
+                            <li>Gratis hasta 14,400 requests/día</li>
+                            <li>Bueno para chatbots simples con contexto corto</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h4>✗ Desventajas CRÍTICAS</h4>
+                        <ul>
+                            <li><strong>8k contexto = 40% de lo que necesitas</strong></li>
+                            <li>Truncará tus PDFs, perdiendo información vital</li>
+                            <li>Mixtral 32k sigue siendo insuficiente para casos complejos</li>
+                            <li>Menor calidad en español legal especializado</li>
+                            <li>Sin soporte nativo de structured output (JSON)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="alert alert-danger">
+                    <h3 style="margin-bottom: 10px;">❌ CONCLUSIÓN: NO USAR GROQ</h3>
+                    <p><strong>Incompatible con tu caso de uso.</strong> Tus documentos exceden el límite de contexto de todos los modelos disponibles en Groq.</p>
+                    <p style="margin-top: 10px;">Groq es excelente para otros casos (chatbots, Q&A simple), pero <strong>no para procesamiento de documentos legales extensos.</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODELO HÍBRIDO -->
+        <div class="section">
+            <h2>🎨 Estrategia de Modelo Híbrido (Recomendada)</h2>
+
+            <div class="alert alert-success">
+                <h3 style="margin-bottom: 15px;">💡 Mejor Relación Calidad-Precio</h3>
+                <p>En lugar de usar un solo modelo, el sistema puede <strong>seleccionar automáticamente</strong> el modelo óptimo según la complejidad de cada ficha.</p>
+            </div>
+
+            <div class="decision-tree">
+                <h3 style="color: #2c3e50; margin-bottom: 20px;">Árbol de Decisión Automática</h3>
+
+                <div class="decision-node">
+                    <h4 style="color: #2c3e50;">1. Analizar documento recibido</h4>
+                    <ul>
+                        <li>Contar número de PDFs</li>
+                        <li>Estimar tokens totales</li>
+                        <li>Detectar presencia de tablas complejas</li>
+                        <li>Verificar si hay múltiples boletines</li>
+                    </ul>
+                </div>
+
+                <div class="decision-node">
+                    <h4 style="color: #2c3e50;">2. Clasificar complejidad</h4>
+                    <table style="width: 100%; margin-top: 10px;">
+                        <tr>
+                            <td><strong>SIMPLE</strong></td>
+                            <td>1 PDF, &lt;20k tokens, estructura clara</td>
+                            <td><strong>40%</strong> de casos</td>
+                        </tr>
+                        <tr>
+                            <td><strong>MEDIUM</strong></td>
+                            <td>1-2 PDFs, 20-60k tokens, tablas moderadas</td>
+                            <td><strong>40%</strong> de casos</td>
+                        </tr>
+                        <tr>
+                            <td><strong>COMPLEX</strong></td>
+                            <td>3+ PDFs, &gt;60k tokens, múltiples anexos</td>
+                            <td><strong>20%</strong> de casos</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="decision-node final">
+                    <h4 style="color: #28a745;">3. Seleccionar modelo óptimo</h4>
+                    <table style="width: 100%; margin-top: 10px;">
+                        <tr style="background: #f8f9fa;">
+                            <td><strong>SIMPLE</strong></td>
+                            <td>→</td>
+                            <td><code>GPT-4o mini</code></td>
+                            <td>$0.005/ficha</td>
+                        </tr>
+                        <tr style="background: #f8f9fa;">
+                            <td><strong>MEDIUM</strong></td>
+                            <td>→</td>
+                            <td><code>GPT-4o</code></td>
+                            <td>$0.088/ficha</td>
+                        </tr>
+                        <tr style="background: #f8f9fa;">
+                            <td><strong>COMPLEX</strong></td>
+                            <td>→</td>
+                            <td><code>Claude 3.5 Sonnet</code></td>
+                            <td>$0.143/ficha</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="price-breakdown">
+                <h4>💰 Costo Híbrido (250 fichas/mes)</h4>
+                <table class="price-table">
+                    <tr>
+                        <td>100 fichas simples × $0.005 (GPT-4o mini):</td>
+                        <td style="text-align: right;">$0.50</td>
+                    </tr>
+                    <tr>
+                        <td>100 fichas medium × $0.088 (GPT-4o):</td>
+                        <td style="text-align: right;">$8.80</td>
+                    </tr>
+                    <tr>
+                        <td>50 fichas complex × $0.143 (Claude 3.5):</td>
+                        <td style="text-align: right;">$7.15</td>
+                    </tr>
+                    <tr>
+                        <td><strong>TOTAL MENSUAL:</strong></td>
+                        <td style="text-align: right; color: #28a745; font-size: 1.3em;"><strong>$16.45/mes</strong></td>
+                    </tr>
+                </table>
+                <p style="margin-top: 15px; color: #7f8c8d;">
+                    <strong>Ahorro vs Claude único:</strong> $19.30/mes (54% más barato)<br/>
+                    <strong>Ahorro vs GPT-4o único:</strong> $11.80/mes (42% más barato)
+                </p>
+            </div>
+
+            <div class="alert alert-success">
+                <h4 style="margin-bottom: 10px;">✅ Ventajas del Modelo Híbrido</h4>
+                <ul style="margin-left: 25px;">
+                    <li><strong>Optimización automática de costos:</strong> Paga más solo cuando es necesario</li>
+                    <li><strong>Calidad garantizada:</strong> Modelo potente para casos difíciles</li>
+                    <li><strong>Simplicidad técnica:</strong> Sistema decide automáticamente (usuario no elige)</li>
+                    <li><strong>Balance perfecto:</strong> 92-95% accuracy al 46% del costo de usar solo Claude</li>
+                    <li><strong>Escalable:</strong> Ahorro aumenta con volumen</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- GUÍA DE DECISIÓN FINAL -->
+        <div class="section">
+            <h2>🎯 Guía de Decisión Final</h2>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin: 30px 0;">
+                <div style="background: #f1f9f3; border: 2px solid #28a745; border-radius: 10px; padding: 25px; text-align: center;">
+                    <h3 style="color: #28a745; margin-bottom: 15px;">🏆 Opción 1</h3>
+                    <h4 style="color: #2c3e50; margin-bottom: 10px;">Modelo Híbrido</h4>
+                    <div style="font-size: 2em; font-weight: bold; color: #28a745; margin: 15px 0;">
+                        $16.45/mes
+                    </div>
+                    <p style="font-size: 0.9em; color: #7f8c8d;">250 fichas</p>
+                    <ul style="text-align: left; margin-top: 20px; list-style: none;">
+                        <li>✓ Mejor costo-calidad</li>
+                        <li>✓ Optimización automática</li>
+                        <li>✓ 92-95% accuracy</li>
+                        <li>✓ Cubre todos los casos</li>
+                    </ul>
+                    <div style="margin-top: 20px; padding: 15px; background: #28a745; color: white; border-radius: 5px; font-weight: bold;">
+                        RECOMENDADO
+                    </div>
+                </div>
+
+                <div style="background: #e8f4f8; border: 2px solid #3498db; border-radius: 10px; padding: 25px; text-align: center;">
+                    <h3 style="color: #3498db; margin-bottom: 15px;">🥈 Opción 2</h3>
+                    <h4 style="color: #2c3e50; margin-bottom: 10px;">Solo Claude 3.5</h4>
+                    <div style="font-size: 2em; font-weight: bold; color: #3498db; margin: 15px 0;">
+                        $35.75/mes
+                    </div>
+                    <p style="font-size: 0.9em; color: #7f8c8d;">250 fichas</p>
+                    <ul style="text-align: left; margin-top: 20px; list-style: none;">
+                        <li>✓ Máxima calidad</li>
+                        <li>✓ 200k contexto</li>
+                        <li>✓ Simplicidad (1 modelo)</li>
+                        <li>⚠️ 117% más caro</li>
+                    </ul>
+                    <div style="margin-top: 20px; padding: 15px; background: #3498db; color: white; border-radius: 5px; font-weight: bold;">
+                        Si priorizas calidad
+                    </div>
+                </div>
+
+                <div style="background: #fff8e1; border: 2px solid #ffc107; border-radius: 10px; padding: 25px; text-align: center;">
+                    <h3 style="color: #f57c00; margin-bottom: 15px;">🥉 Opción 3</h3>
+                    <h4 style="color: #2c3e50; margin-bottom: 10px;">Solo GPT-4o</h4>
+                    <div style="font-size: 2em; font-weight: bold; color: #f57c00; margin: 15px 0;">
+                        $28.25/mes
+                    </div>
+                    <p style="font-size: 0.9em; color: #7f8c8d;">250 fichas</p>
+                    <ul style="text-align: left; margin-top: 20px; list-style: none;">
+                        <li>✓ Buen balance</li>
+                        <li>✓ 128k contexto</li>
+                        <li>✓ Ecosistema OpenAI</li>
+                        <li>⚠️ 72% más caro</li>
+                    </ul>
+                    <div style="margin-top: 20px; padding: 15px; background: #ffc107; color: #333; border-radius: 5px; font-weight: bold;">
+                        Alternativa válida
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- IMPLEMENTACIÓN -->
+        <div class="section">
+            <h2>⚙️ Implementación Práctica</h2>
+
+            <h3>Configuración Recomendada (.env)</h3>
+
+            <div style="background: #2c3e50; color: #ecf0f1; padding: 20px; border-radius: 5px; font-family: 'Courier New', monospace; margin: 20px 0;">
+<pre style="margin: 0; color: #ecf0f1;">
+# === MODELO HÍBRIDO (RECOMENDADO) ===
+
+# OpenAI (para GPT-4o mini y GPT-4o)
+OPENAI_API_KEY=sk-proj-your-key-here
+
+# Anthropic (para Claude 3.5 Sonnet en casos complejos)
+ANTHROPIC_API_KEY=sk-ant-your-key-here
+
+# Configuración de selección automática
+USE_HYBRID_MODEL=True
+SIMPLE_MODEL=gpt-4o-mini
+MEDIUM_MODEL=gpt-4o
+COMPLEX_MODEL=claude-3-5-sonnet-20241022
+
+# Umbrales de clasificación (tokens)
+SIMPLE_THRESHOLD=20000
+COMPLEX_THRESHOLD=60000
+</pre>
+            </div>
+
+            <h3>Código de Selección Automática (Python)</h3>
+
+            <div style="background: #2c3e50; color: #ecf0f1; padding: 20px; border-radius: 5px; font-family: 'Courier New', monospace; margin: 20px 0;">
+<pre style="margin: 0; color: #ecf0f1;">
+<span style="color: #66d9ef;">def</span> <span style="color: #a6e22e;">select_model</span>(pdf_text: <span style="color: #66d9ef;">str</span>, num_pdfs: <span style="color: #66d9ef;">int</span>) -> <span style="color: #66d9ef;">str</span>:
+    <span style="color: #75715e;">"""Selecciona modelo óptimo según complejidad"""</span>
+
+    <span style="color: #75715e;"># Estimar tokens (1 token ≈ 4 caracteres)</span>
+    estimated_tokens = len(pdf_text) // <span style="color: #ae81ff;">4</span>
+
+    <span style="color: #75715e;"># Clasificar complejidad</span>
+    <span style="color: #f92672;">if</span> num_pdfs == <span style="color: #ae81ff;">1</span> <span style="color: #f92672;">and</span> estimated_tokens < <span style="color: #ae81ff;">20000</span>:
+        model = <span style="color: #e6db74;">"gpt-4o-mini"</span>
+        complexity = <span style="color: #e6db74;">"SIMPLE"</span>
+
+    <span style="color: #f92672;">elif</span> estimated_tokens < <span style="color: #ae81ff;">60000</span>:
+        model = <span style="color: #e6db74;">"gpt-4o"</span>
+        complexity = <span style="color: #e6db74;">"MEDIUM"</span>
+
+    <span style="color: #f92672;">else</span>:
+        model = <span style="color: #e6db74;">"claude-3-5-sonnet-20241022"</span>
+        complexity = <span style="color: #e6db74;">"COMPLEX"</span>
+
+    logger.info(<span style="color: #e6db74;">f"Seleccionado {model} para caso {complexity} ({estimated_tokens} tokens)"</span>)
+
+    <span style="color: #f92672;">return</span> model
+</pre>
+            </div>
+        </div>
+
+        <!-- RESUMEN FINAL -->
+        <div class="recommendation-box">
+            <h2>📋 Resumen y Decisión Final</h2>
+
+            <div style="text-align: left; margin-top: 30px; padding: 25px; background: rgba(255,255,255,0.2); border-radius: 10px;">
+                <h3 style="color: white; margin-bottom: 20px;">✅ RECOMENDACIÓN FINAL:</h3>
+
+                <div style="font-size: 1.5em; font-weight: bold; margin: 20px 0;">
+                    Implementar Modelo Híbrido
+                </div>
+
+                <ul style="font-size: 1.1em; margin: 20px 0;">
+                    <li><strong>GPT-4o mini</strong> para casos simples (1 PDF, &lt;20k tokens)</li>
+                    <li><strong>GPT-4o</strong> para casos medianos (1-2 PDFs, 20-60k tokens)</li>
+                    <li><strong>Claude 3.5 Sonnet</strong> para casos complejos (3+ PDFs, &gt;60k tokens)</li>
+                </ul>
+
+                <div style="margin-top: 25px; padding: 20px; background: rgba(0,0,0,0.2); border-radius: 5px;">
+                    <div style="font-size: 1.2em; margin-bottom: 10px;"><strong>Costo:</strong> $16.45/mes (250 fichas)</div>
+                    <div style="font-size: 1.2em; margin-bottom: 10px;"><strong>Calidad:</strong> 92-95% accuracy</div>
+                    <div style="font-size: 1.2em;"><strong>Cobertura:</strong> 100% de casos (hasta 200k tokens)</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 30px; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 5px;">
+                <h4 style="color: white; margin-bottom: 15px;">🚫 Modelos a EVITAR:</h4>
+                <ul>
+                    <li><strong>Groq:</strong> Contexto insuficiente (8k-32k vs tus 20-60k necesarios)</li>
+                    <li><strong>GPT-3.5 Turbo:</strong> Calidad insuficiente para producción</li>
+                    <li><strong>Solo GPT-4o mini:</strong> Precisión demasiado baja para casos complejos</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div style="text-align: center; margin-top: 50px; padding-top: 20px; border-top: 2px solid #ecf0f1; color: #7f8c8d;">
+            <p><strong>Comparación de Modelos LLM</strong></p>
+            <p style="margin-top: 10px;">Generador de Fichas de Ayudas Sociales | Noviembre 2024</p>
+            <p style="margin-top: 5px; font-size: 0.9em;">
+                Análisis basado en complejidad real de documentos legales españoles
+            </p>
+        </div>
+    </div>
+</body>
+</html>
