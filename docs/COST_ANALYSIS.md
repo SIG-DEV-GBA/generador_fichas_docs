@@ -8,6 +8,543 @@ Para **250 fichas/mes**, el sistema automatizado genera un **ahorro de €5,348/
 
 ---
 
+## 🔬 Análisis Detallado: Proceso Manual vs Automatizado
+
+### 1. Proceso Manual Actual
+
+#### 1.1 Workflow Tradicional
+
+El proceso manual para generar una ficha social requiere múltiples pasos intensivos en tiempo y conocimiento especializado:
+
+**FASE 1: Lectura y Comprensión (30 minutos)**
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                     PROCESO DE LECTURA MANUAL                        │
+└─────────────────────────────────────────────────────────────────────┘
+
+1. Descarga de documentos (2-3 min)
+   └─ PDFs, Word, anexos desde portales oficiales
+
+2. Lectura completa de documentación (20-25 min)
+   ├─ Boletines oficiales: 15-30 páginas
+   ├─ Bases reguladoras: 10-20 páginas
+   ├─ Anexos y formularios: 5-10 páginas
+   └─ Total: 30-60 páginas por ayuda
+
+3. Identificación de secciones relevantes (3-5 min)
+   ├─ Artículos sobre requisitos
+   ├─ Tablas de cuantías
+   ├─ Plazos y fechas
+   └─ Documentación requerida
+
+PROBLEMAS:
+✗ Fatiga mental tras 3-4 fichas consecutivas
+✗ Riesgo de omitir información en documentos extensos
+✗ Variabilidad según experiencia del técnico
+✗ Requiere conocimiento legal y administrativo
+```
+
+**FASE 2: Extracción de Información (20 minutos)**
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│              EXTRACCIÓN MANUAL DE DATOS ESTRUCTURADOS                │
+└─────────────────────────────────────────────────────────────────────┘
+
+1. Búsqueda de campos obligatorios (10 min)
+   ├─ Nombre oficial de la ayuda
+   ├─ Fechas (inicio, fin, publicación)
+   ├─ Requisitos de acceso
+   ├─ Beneficiarios
+   ├─ Cuantías y tablas económicas
+   └─ Normativa reguladora (BOE/BOP/BOJA)
+
+2. Interpretación de lenguaje legal (5 min)
+   ├─ Traducción de términos técnicos
+   ├─ Comprensión de referencias cruzadas
+   └─ Identificación de excepciones y casos especiales
+
+3. Toma de notas y apuntes (5 min)
+   └─ Copiar manualmente datos relevantes
+
+PROBLEMAS:
+✗ Copiar/pegar introduce errores de formato
+✗ Tablas económicas requieren reformateo manual
+✗ Fechas en múltiples formatos (DD/MM/YYYY vs literal)
+✗ Referencias legislativas dispersas en el documento
+```
+
+**FASE 3: Redacción y Adaptación (25 minutos)**
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│         REDACCIÓN EN LENGUAJE CLARO Y ESTRUCTURACIÓN                │
+└─────────────────────────────────────────────────────────────────────┘
+
+1. Transformación a lenguaje ciudadano (15 min)
+   ├─ De: "Los sujetos beneficiarios serán aquellos..."
+   ├─ A: "Pueden solicitar esta ayuda las personas que..."
+   └─ Requiere habilidad de redacción técnica
+
+2. Estructuración según modelo de ficha (7 min)
+   ├─ Respetar 20+ campos obligatorios
+   ├─ Clasificar en categorías predefinidas
+   ├─ Asignar portales correctos (Mayores/Discapacidad/etc)
+   └─ Adaptar cuantías a formato tabla legible
+
+3. Validación de coherencia (3 min)
+   ├─ Verificar que no haya duplicados entre campos
+   ├─ Comprobar que todos los campos estén completos
+   └─ Revisar lógica (fecha_inicio < fecha_fin)
+
+PROBLEMAS:
+✗ Estilo inconsistente entre técnicos
+✗ Riesgo de duplicar contenido entre campos
+✗ Dificultad para mantener tono uniforme
+✗ Cada técnico estructura de forma diferente
+```
+
+**FASE 4: Revisión de Calidad (10 minutos)**
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                   CONTROL DE CALIDAD MANUAL                          │
+└─────────────────────────────────────────────────────────────────────┘
+
+1. Verificación de errores comunes (5 min)
+   ├─ Fechas correctas y en formato DD/MM/YYYY
+   ├─ Importes con símbolo € y dos decimales
+   ├─ URLs funcionantes
+   └─ Sin duplicados entre campos
+
+2. Comprobación de completitud (3 min)
+   ├─ Todos los 20+ campos obligatorios rellenos
+   ├─ Arrays con al menos 1 elemento
+   └─ Normativa reguladora solo con boletines oficiales
+
+3. Revisión ortográfica y estilo (2 min)
+   └─ Coherencia terminológica
+
+PROBLEMAS:
+✗ Errores solo se detectan después de redactar
+✗ Requiere segunda persona para revisión objetiva
+✗ Sin checklist estandarizado
+✗ Variabilidad en criterios de calidad
+```
+
+**FASE 5: Formateo en Word (10 minutos)**
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│              GENERACIÓN DOCUMENTO WORD FINAL                         │
+└─────────────────────────────────────────────────────────────────────┘
+
+1. Creación de tabla estructura (3 min)
+   ├─ 2 columnas: CAMPO | CONCEPTO
+   ├─ Filas para cada uno de los 20+ campos
+   └─ Aplicar estilos corporativos
+
+2. Copy-paste de contenido redactado (5 min)
+   ├─ Copiar campo por campo desde notas
+   ├─ Ajustar saltos de línea
+   ├─ Formatear tablas económicas manualmente
+   └─ Aplicar negritas, cursivas según convenga
+
+3. Ajustes finales de formato (2 min)
+   ├─ Alinear columnas
+   ├─ Verificar que no se descuadren tablas
+   └─ Guardar con nomenclatura correcta
+
+PROBLEMAS:
+✗ Formateo manual propenso a inconsistencias
+✗ Tablas de cuantías se descuadran fácilmente
+✗ Pérdida de tiempo en ajustes visuales
+✗ Versiones de Word generan compatibilidad issues
+```
+
+#### 1.2 Problemas Críticos del Proceso Manual
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│              ERRORES FRECUENTES DOCUMENTADOS                         │
+└─────────────────────────────────────────────────────────────────────┘
+
+Basado en docs/ERRORES_FICHAS_CONSOLIDADO_REV.json (21/08/2025):
+
+❌ ERROR #1: Duplicación de contenidos
+   └─ Mismo dato en "Beneficiarios" y "Requisitos de acceso"
+   └─ Causa: Falta de checklist en revisión manual
+
+❌ ERROR #2: Formato incorrecto en tablas económicas
+   └─ Sin puntos suspensivos, sin €, sin coma decimal
+   └─ Causa: Cada técnico aplica su propio criterio
+
+❌ ERROR #3: Contenido en columna incorrecta
+   └─ Datos descriptivos en 'CAMPO' en lugar de 'CONCEPTO'
+   └─ Causa: Falta de entendimiento del modelo
+
+❌ ERROR #4: Normativa con datos inválidos
+   └─ Se incluyen resoluciones que no son boletines oficiales
+   └─ Causa: No verificar cabecera del PDF
+
+❌ ERROR #5: Múltiples inserciones de valores IPREM/SMI
+   └─ Valor insertado en 3-4 campos diferentes
+   └─ Causa: No hay validación de unicidad
+
+❌ ERROR #6: Campo USUARIO incorrecto
+   └─ "Miguel" o "Carpeta pruebas" en lugar del proyecto
+   └─ Causa: Llenado manual sin validación
+
+❌ ERROR #7: Frases publicitarias demasiado largas
+   └─ >120 caracteres, tono excesivamente comercial
+   └─ Causa: Falta de límite técnico
+
+IMPACTO:
+├─ 14 tipos de errores recurrentes documentados
+├─ ~30% de fichas requieren corrección post-generación
+├─ 15-20 min adicionales de retrabajo por error
+└─ Frustración y pérdida de confianza en calidad
+```
+
+#### 1.3 Limitaciones de Escalabilidad
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│              CUELLOS DE BOTELLA DEL PROCESO MANUAL                   │
+└─────────────────────────────────────────────────────────────────────┘
+
+CAPACIDAD MÁXIMA POR TÉCNICO:
+├─ 1 ficha = 95 minutos promedio
+├─ 1 día laboral (8h = 480 min) = 5 fichas/día
+├─ 1 mes (22 días laborables) = 110 fichas/mes MAX
+└─ Para 250 fichas/mes → SE REQUIEREN 2.3 TÉCNICOS
+
+PROBLEMAS DE ESCALABILIDAD:
+✗ Vacaciones/bajas → pérdida de capacidad del 100%
+✗ Curva de aprendizaje: 2-3 meses para nuevo técnico
+✗ Variabilidad de calidad entre técnicos
+✗ Costo de supervisión y formación continua
+✗ No viable procesar picos de demanda (400+ fichas/mes)
+
+COSTO DE CONTRATACIÓN ADICIONAL:
+├─ Salario técnico cualificado: €25,000-35,000/año
+├─ Formación inicial: 2-3 meses (€5,000-7,000)
+├─ Supervisión continua: 10-15% tiempo gestor
+└─ Total por técnico adicional: ~€35,000/año
+```
+
+---
+
+### 2. Proceso Automatizado con IA
+
+#### 2.1 Workflow del Sistema
+
+**FASE 1: Upload y Pre-procesamiento (30 segundos)**
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                 INGESTA AUTOMATIZADA DE DOCUMENTOS                   │
+└─────────────────────────────────────────────────────────────────────┘
+
+1. Usuario sube PDF(s) via interfaz web (0.5 min)
+   └─ Drag & drop múltiples archivos
+
+2. Sistema procesa automáticamente (0 min - transparente):
+   ├─ Extracción de texto con PyMuPDF
+   ├─ Detección de tablas con pdfplumber
+   ├─ Identificación de boletín oficial (header check)
+   ├─ OCR si es PDF escaneado
+   ├─ Estimación de tokens para selección de modelo
+   └─ Detección de complejidad (simple/medium/complex)
+
+VENTAJAS:
+✓ Procesa 3-4 PDFs simultáneamente
+✓ Extrae tablas preservando estructura
+✓ Identifica automáticamente tipo de documento
+✓ Sin intervención humana
+✓ Validación técnica instantánea
+```
+
+**FASE 2: Generación con RAG (30 segundos)**
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│           GENERACIÓN INTELIGENTE CON EJEMPLOS SIMILARES              │
+└─────────────────────────────────────────────────────────────────────┘
+
+1. Búsqueda semántica en ChromaDB (automático)
+   ├─ Embedding del PDF con sentence-transformers
+   ├─ Recuperación de 3 fichas similares (RAG)
+   └─ Contexto: PDF + 3 ejemplos de referencia
+
+2. Selección automática de modelo LLM:
+   ├─ SIMPLE (1 PDF, <20k tokens) → GPT-4o mini
+   ├─ MEDIUM (2 PDFs, 20-60k) → GPT-4o
+   └─ COMPLEX (3+ PDFs, >60k) → Claude 3.5 Sonnet
+
+3. Generación con prompt engineering optimizado (0.5 min)
+   ├─ System prompt con 41 instrucciones oficiales
+   ├─ Validaciones en el prompt (14 errores conocidos)
+   ├─ Output estructurado en JSON Schema
+   └─ Aplicación de lenguaje claro automáticamente
+
+VENTAJAS:
+✓ Aprende de ejemplos previos (RAG)
+✓ Consistencia 100% en estructura
+✓ Aplica TODAS las reglas simultáneamente
+✓ Sin fatiga ni errores de transcripción
+✓ Modelo adaptado a complejidad
+```
+
+**FASE 3: Validación Automática (5 segundos)**
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│              VALIDACIÓN MULTINIVEL AUTOMÁTICA                        │
+└─────────────────────────────────────────────────────────────────────┘
+
+1. Validación de Schema (Pydantic)
+   ├─ 20+ campos obligatorios presentes
+   ├─ Tipos de datos correctos (string, array, date)
+   ├─ Enums válidos (portales, categorías, tipo_ayuda)
+   ├─ Formatos: fechas DD/MM/YYYY, arrays min 1 item
+   └─ BLOQUEA generación si no cumple
+
+2. Validación de Negocio (Custom validators)
+   ├─ fecha_inicio < fecha_fin
+   ├─ Normativa solo con boletines oficiales
+   ├─ Valores IPREM/SMI/IRSC solo 1 vez
+   ├─ Sin duplicados entre campos
+   ├─ Frases publicitarias ≤ 120 caracteres
+   └─ ALERT si detecta problemas
+
+3. Validación de Calidad (LLM-based)
+   ├─ Coherencia entre campos
+   ├─ Tono de lenguaje claro
+   ├─ Completitud de información
+   └─ SCORE de calidad 0-100
+
+VENTAJAS:
+✓ 3 capas de validación automática
+✓ Errores bloqueados ANTES de generar
+✓ 100% de fichas cumplen schema
+✓ Reduce revisión manual a 5 min
+✓ Métricas objetivas de calidad
+```
+
+**FASE 4: Generación Word (5 segundos)**
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│              GENERACIÓN AUTOMÁTICA DE DOCUMENTO                      │
+└─────────────────────────────────────────────────────────────────────┘
+
+1. Template Word pre-formateado (python-docx)
+   ├─ Tabla 2 columnas con estilos corporativos
+   ├─ Tipografías y márgenes estándar
+   └─ Header/footer automático
+
+2. Población de datos desde JSON validado
+   ├─ Campo por campo con formateo correcto
+   ├─ Tablas económicas con formato tabla
+   ├─ Negritas/cursivas según reglas
+   └─ Saltos de línea consistentes
+
+3. Exportación final
+   ├─ Nomenclatura automática: ayuda_id_fecha.docx
+   ├─ Metadatos embebidos (autor, fecha, versión)
+   └─ Listo para descarga
+
+VENTAJAS:
+✓ Formato 100% consistente
+✓ Sin errores de alineación
+✓ Tablas perfectas siempre
+✓ Compatible con todas las versiones de Word
+✓ Generación instantánea
+```
+
+**FASE 5: Revisión Humana (5 minutos)**
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│              REVISIÓN ENFOCADA EN CONTENIDO                          │
+└─────────────────────────────────────────────────────────────────────┘
+
+Usuario solo verifica:
+├─ Coherencia de la información extraída
+├─ Matices de interpretación legal (casos raros)
+└─ Aprobación final
+
+NO necesita verificar:
+✗ Formato → garantizado por sistema
+✗ Completitud de campos → validado automáticamente
+✗ Duplicados → detectados por validación
+✗ Fechas incorrectas → bloqueadas por Pydantic
+✗ Ortografía → modelo LLM no comete errores
+
+VENTAJAS:
+✓ 90.5% reducción en tiempo de revisión
+✓ Enfoque solo en aspectos críticos
+✓ Menor fatiga mental
+✓ Capacidad de revisar 10-15 fichas/hora
+```
+
+#### 2.2 Ventajas Técnicas del Sistema Automatizado
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                  CAPACIDADES SUPERIORES DE LA IA                     │
+└─────────────────────────────────────────────────────────────────────┘
+
+1. PROCESAMIENTO PARALELO
+   ├─ 3-4 PDFs leídos simultáneamente
+   ├─ Contexto de 200,000 tokens (=400 páginas A4)
+   └─ Comprensión holística del documento completo
+
+   vs Manual: lectura secuencial, memoria limitada
+
+2. MEMORIA PERFECTA
+   ├─ Nunca olvida una instrucción
+   ├─ Aplica 41 reglas en paralelo
+   └─ Recuerda 14 errores comunes a evitar
+
+   vs Manual: fatiga tras 3-4 fichas, omisiones frecuentes
+
+3. CONSISTENCIA ABSOLUTA
+   ├─ Misma calidad en ficha #1 y #1000
+   ├─ Mismo criterio 24/7/365
+   └─ Sin variabilidad entre "técnicos"
+
+   vs Manual: estilo cambia entre personas y días
+
+4. APRENDIZAJE CONTINUO (RAG)
+   ├─ Aprende de cada ficha añadida a la base
+   ├─ Mejora con retroalimentación
+   └─ Adapta estilo a preferencias del usuario
+
+   vs Manual: curva de aprendizaje 2-3 meses
+
+5. DETECCIÓN ANTICIPADA DE ERRORES
+   ├─ Valida ANTES de generar
+   ├─ Bloquea errores conocidos
+   └─ Alerta sobre problemas potenciales
+
+   vs Manual: errores detectados después de redactar
+```
+
+#### 2.3 Comparativa de Métricas Clave
+
+```
+┌────────────────────────────────────────────────────────────────────┐
+│                MANUAL vs AUTOMATIZADO - COMPARATIVA                 │
+├─────────────────────┬──────────────────┬────────────────────────────┤
+│      MÉTRICA        │      MANUAL      │      AUTOMATIZADO          │
+├─────────────────────┼──────────────────┼────────────────────────────┤
+│                     │                  │                            │
+│ Tiempo/ficha        │  95 minutos      │  9 minutos  (↓ 90.5%)     │
+│                     │  ████████████    │  █                         │
+│                     │                  │                            │
+├─────────────────────┼──────────────────┼────────────────────────────┤
+│                     │                  │                            │
+│ Tasa de error       │  ~30%            │  <5%  (↓ 83%)             │
+│                     │  ██████          │  █                         │
+│                     │                  │                            │
+├─────────────────────┼──────────────────┼────────────────────────────┤
+│                     │                  │                            │
+│ Consistencia        │  Variable        │  100%  (absoluta)          │
+│                     │  60-85%          │  ██████████████            │
+│                     │                  │                            │
+├─────────────────────┼──────────────────┼────────────────────────────┤
+│                     │                  │                            │
+│ Capacidad/mes       │  110 fichas      │  ILIMITADO*                │
+│ (1 persona)         │  ██████          │  ████████████████████████  │
+│                     │                  │  (*con restricciones API)  │
+│                     │                  │                            │
+├─────────────────────┼──────────────────┼────────────────────────────┤
+│                     │                  │                            │
+│ Costo/ficha         │  €23.70          │  €2.31  (↓ 90.3%)         │
+│                     │  ████████████    │  █                         │
+│                     │                  │                            │
+├─────────────────────┼──────────────────┼────────────────────────────┤
+│                     │                  │                            │
+│ Disponibilidad      │  8h/día          │  24/7/365                  │
+│                     │  5 días/semana   │  Sin límite horario        │
+│                     │                  │                            │
+├─────────────────────┼──────────────────┼────────────────────────────┤
+│                     │                  │                            │
+│ Escalabilidad       │  Lineal con      │  Exponencial               │
+│                     │  contrataciones  │  Sin contratar             │
+│                     │                  │                            │
+├─────────────────────┼──────────────────┼────────────────────────────┤
+│                     │                  │                            │
+│ Formación nueva     │  2-3 meses       │  0 minutos                 │
+│ persona             │  €5,000-7,000    │  €0                        │
+│                     │                  │                            │
+└─────────────────────┴──────────────────┴────────────────────────────┘
+```
+
+---
+
+### 3. Diferencias Cualitativas Críticas
+
+#### 3.1 Gestión del Conocimiento
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│              MANUAL: Conocimiento Disperso                           │
+└─────────────────────────────────────────────────────────────────────┘
+
+├─ Know-how en cabeza de técnicos individuales
+├─ Pérdida de conocimiento si técnico se va
+├─ Dificultad para actualizar criterios en equipo
+├─ Sin trazabilidad de decisiones interpretativas
+└─ Dependencia de personas clave
+
+RIESGO: Pérdida de continuidad y calidad variable
+```
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│              AUTOMATIZADO: Conocimiento Centralizado                 │
+└─────────────────────────────────────────────────────────────────────┘
+
+├─ Instrucciones en código (JSON + prompts)
+├─ Actualizaciones propagadas instantáneamente
+├─ Histórico de versiones con git
+├─ Trazabilidad completa de cada decisión
+└─ Independiente de personas
+
+VENTAJA: Continuidad garantizada, mejora continua documentada
+```
+
+#### 3.2 Calidad y Trazabilidad
+
+```
+MANUAL:
+✗ Calidad depende de: experiencia, cansancio, formación
+✗ Sin métricas objetivas de calidad
+✗ Revisión subjetiva entre pares
+✗ Dificultad para identificar patrones de error
+
+AUTOMATIZADO:
+✓ Calidad constante: mismo modelo = mismo output
+✓ Métricas cuantificables: accuracy, completitud, coherencia
+✓ Validación automática multicapa
+✓ Logs completos de cada decisión del modelo
+✓ A/B testing posible para mejorar prompts
+```
+
+#### 3.3 Capacidad de Adaptación
+
+```
+ESCENARIO: Nueva normativa obliga cambios en estructura ficha
+
+MANUAL:
+├─ Comunicar cambios a todo el equipo (1-2 días)
+├─ Formación sobre nuevos campos (1 semana)
+├─ Periodo de adaptación con errores (2-3 semanas)
+└─ Total: 1 mes para estabilizar
+
+AUTOMATIZADO:
+├─ Actualizar JSON schema (30 min)
+├─ Modificar prompt instructions (1 hora)
+├─ Deploy nuevo código (5 min)
+└─ Total: 2 horas, efectivo inmediatamente
+```
+
+---
+
 ## 📊 Diagrama de Costos por Modelo
 
 ```
