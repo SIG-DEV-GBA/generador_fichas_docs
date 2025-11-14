@@ -1,0 +1,315 @@
+{
+  "metadata": {
+    "version": "instrucciones-compactas-2025-08-12",
+    "idioma": "es",
+    "proposito": "Guía operativa compacta para elaborar Fichas Sociales (sin pérdida de cobertura)."
+  },
+  "reglas_comunes": [
+    "Lenguaje Claro: voz activa, frases cortas, léxico común; explica tecnicismos si aparecen.",
+    "Abrir el modo editor/canvas.",
+    "No inventar datos; solo reorganizar y aclarar lo que consta en la normativa.",
+    "Texto plano (sin tablas), salvo bloque 'Cuantía' que usa lista/estructura especial.",
+    "Campos en **negrita** seguidos de dos puntos: '**Campo:** texto'.",
+    "Evitar repeticiones entre campos; cada dato va una sola vez en su campo.",
+    "Fechas en formato dd/mm/aaaa.",
+    "Prohibidos iconos decorativos, referencias cruzadas y encabezados no previstos."
+  ],
+  "estructura_documento": [
+    "1) Reglas comunes",
+    "2) Campos (reglas específicas solo donde apliquen excepciones)",
+    "3) Validaciones transversales (incluye Boletines/BDNS e IPREM/SMI/IRSC)",
+    "4) Formatos especiales (Cuantía)",
+    "5) Orden de campos del modelo",
+    "6) Valores de referencia",
+    "7) Errores frecuentes y checklist final"
+  ],
+  "campos": {
+    "nombre_ayuda": {
+      "titulo": "Nombre de la ayuda",
+      "aplica_reglas_comunes": true,
+      "reglas": [
+        "Resume el título oficial aplicando Lenguaje Claro.",
+        "Incluye año si consta (en plurianual, indica año aplicable)."
+      ]
+    },
+    "portales": {
+      "titulo": "Portales",
+      "aplica_reglas_comunes": true,
+      "restricciones": {
+        "enum": ["Mayores","Discapacidad","Familia","Mujer","Salud"],
+        "permite_varios": true,
+        "orden_obligatorio": ["Mayores","Discapacidad","Familia","Mujer","Salud"],
+        "no_duplicar_con": ["categoria"]
+      }
+    },
+    "categoria": {
+      "titulo": "Categoría",
+      "aplica_reglas_comunes": true,
+      "restricciones": {
+        "enum": ["Básicas","Vivienda","Enseres","Salud","Discapacidad","Dependencia","Servicios","Rentas","Técnicas","Catástrofes","Acogimiento"],
+        "permite_varios": true,
+        "no_duplicar_con": ["portales"]
+      }
+    },
+    "tipo_ayuda": {
+      "titulo": "Tipo de ayuda",
+      "aplica_reglas_comunes": true,
+      "restricciones": {
+        "enum_ref": "Directorio Tipos de Ayuda",
+        "permite_varios": false
+      },
+      "notas": ["Debe indicar lo que se ofrece (producto/servicio/acción)", "Independiente de 'Categoría'"]
+    },
+    "fechas": {
+      "titulo": "Fechas (Inicio / Fin / Publicación BDNS o BOP)",
+      "aplica_reglas_comunes": true,
+      "reglas": [
+        "Inicio: día siguiente a la publicación oficial, salvo indicación distinta.",
+        "Publicación: BOP/BDNS real (sin estimaciones)."
+      ]
+    },
+    "ambito_territorial": {
+      "titulo": "Ámbito territorial",
+      "aplica_reglas_comunes": true,
+      "reglas": ["Indica municipio, provincia, comunidad autónoma o estatal."]
+    },
+    "administracion": {
+      "titulo": "Administración convocante",
+      "aplica_reglas_comunes": true,
+      "reglas": [
+        "Nombre completo de la entidad.",
+        "Si es administración local (ayuntamiento, diputación, mancomunidad), añadir la provincia entre paréntesis.",
+        "Si es administración autonómica, indicar la comunidad autónoma o el gobierno autonómico al que pertenece, no la provincia.",
+        "No abreviar denominaciones institucionales (usar 'Gobierno de Aragón' en lugar de 'DGA').",
+        "Verificar la fuente oficial para asegurar que el organismo es convocante y no colaborador."
+       ]
+    },
+    "plazo_presentacion": {
+      "titulo": "Plazo de presentación",
+      "aplica_reglas_comunes": true,
+      "reglas": [
+        "Usa la fórmula única: 'El plazo permanecerá abierto hasta (Fecha de fin)'.",
+        "No usar plazos relativos (p. ej., '15 días desde...')."
+      ]
+    },
+    "requisitos_acceso": {
+      "titulo": "Requisitos de acceso",
+      "aplica_reglas_comunes": true,
+      "reglas": [
+        "Se inicia el texto con la frase: 'Los requisitos para optar a las ayudas son los siguientes:'.",
+        "Agrupa por modalidad si existen: generales y luego específicos.",
+        "Si aparece IPREM/SMI/IRSC y no se añadió en 'Beneficiarios', añadir aquí.",
+        "No incluir datos de 'Cuantía'."
+      ]
+    },
+    "beneficiarios": {
+      "titulo": "Beneficiarios/Destinatarios",
+      "aplica_reglas_comunes": true,
+      "reglas": [
+        "Describe el colectivo destinatario con claridad.",
+        "Se inicia el texto con la frase: 'Podrán ser beneficiarias:'.",
+        "No repitas requisitos que van en 'Requisitos de acceso'.",
+        "Si el texto menciona IPREM/SMI/IRSC, insertar automáticamente el valor vigente desde 'valores_referencia_2025' (solo la línea correspondiente) siguiendo la prioridad de campos definida en validaciones transversales."
+      ]
+    },
+    "descripcion": {
+      "titulo": "Descripción (antes 'Objeto')",
+      "aplica_reglas_comunes": true,
+      "reglas": [
+        "Incluye modalidades, gastos cubiertos, requisitos específicos, finalidad, modo de pago (incluida transferencia) e incompatibilidades generales.",
+        "Ordenar en párrafos separados y visualmente accesibles",
+        "No incluir importes (van en 'Cuantía')."
+      ]
+    },
+    "cuantia": {
+      "titulo": "Cuantía",
+      "aplica_reglas_comunes": true,
+      "reglas": [
+        "Detalla todas las cifras, tramos y porcentajes disponibles.",
+        "Se inicia el texto con la frase: 'La cuantía de la ayuda será:'.",
+        "Evita fórmulas genéricas si existen números.",
+        "No incluir el importe total de la subvención.",
+        "Si hay 'máximo por beneficiario', repítelo en 'Importe máximo'.",
+        "Aplicar 'formato_cuantia'."
+      ]
+    },
+    "importe_maximo": {
+      "titulo": "Importe máximo",
+      "aplica_reglas_comunes": true,
+      "reglas": ["Indica máximo por solicitante y por modalidad si procede (aunque conste en 'Cuantía')."]
+    },
+    "resolucion": {
+      "titulo": "Resolución",
+      "aplica_reglas_comunes": true,
+      "reglas": [
+        "Incluye plazo máximo de resolución y notificación.",
+        "Indica modo de comunicación si figura.",
+        "Silencio administrativo: si no se indica, negativo (art. 24 Ley 39/2015)."
+      ]
+    },
+    "documentos_presentar": {
+      "titulo": "Documentos a presentar",
+      "aplica_reglas_comunes": true,
+      "reglas": [
+        "Introduce con: 'La documentación a presentar es la siguiente:' y lista con guiones.",
+        "Primero generales; luego específicos por modalidad.",
+        "Un documento por línea.",
+        "No citar anexos explícitamente."
+      ]
+    },
+    "costes_no_subvencionables": {
+      "titulo": "Costes no subvencionables",
+      "aplica_reglas_comunes": true,
+      "reglas": [
+        "Citar solo gastos excluidos expresamente (IVA/impuestos, no esenciales, previos sin justificación, duplicidades, fuera de plazo o sin relación con la finalidad…).",
+        "Añadir incompatibilidades específicas de exclusión si la convocatoria las sitúa bajo epígrafes equivalentes.",
+        "Incompatibilidades generales → en 'Descripción'."
+      ]
+    },
+    "criterios_concesion": {
+      "titulo": "Criterios de concesión",
+      "aplica_reglas_comunes": true,
+      "reglas": ["Exponer criterios objetivos (baremos, puntuaciones, prioridades) tal como figuran.", "No hacer inferencias.", "Si no hay baremo, dejar en blanco."]
+    },
+    "normativa_reguladora": {
+      "titulo": "Normativa reguladora",
+      "aplica_reglas_comunes": true,
+      "estructura": ["Extracto","Convocatoria","Bases","Otros acuerdos"],
+      "reglas": [
+        "Lista con guiones, título literal y punto final.",
+        "Debe mencionarse el nombre completo del Edicto, Bases Reguladoras, Extracto, Convocatoria, etc.",
+        "Añade boletín/BDNS si consta con formato: 'BOP (provincia/comunidad/país) núm. (número), (dd/mm/aaaa)' y/o 'Base de Datos Nacional de Subvenciones Nº (número), (dd/mm/aaaa)'.",
+        "No inventar números de boletín."
+      ]
+    },
+    "referencia_legislativa": {
+      "titulo": "Referencia legislativa",
+      "aplica_reglas_comunes": true,
+      "reglas": ["Lista con guiones; nombre oficial completo (sin artículos).", "Incluye fecha y boletín si aparece.", "Punto final obligatorio."]
+    },
+    "lugar_presentacion": {
+      "titulo": "Lugar y forma de presentación",
+      "aplica_reglas_comunes": true,
+      "bloques_obligatorios": ["Presencialmente en","Electrónicamente en"],
+      "reglas": [
+        "Presencial: institución, dirección postal, fax, email, teléfono.",
+        "Texto fijo: Oficinas de correos (sobre abierto para compulsa) y Registro de Ventanilla Única en territorio nacional.",
+        "Electrónica: sede y URL exacta; si existe URL específica del trámite, incluirla.",
+        "Citar el REC – Red SARA."
+      ]
+    },
+    "otros_datos": {
+      "titulo": "Otros datos",
+      "aplica_reglas_comunes": true,
+      "orden_subapartados": ["USUARIO","FECHA","FRASE PARA PUBLICITAR","DOCUMENTOS_ADJUNTOS"],
+      "reglas": [
+        "USUARIO: nombre exacto del proyecto activo (MAYÚSCULAS) omitiendo 'Carpeta'.",
+        "FECHA: día de realización.",
+        "FRASE PARA PUBLICITAR: solo si la ayuda es estatal/autonómica/provincial, máx. 20 palabras, tono cercano con llamada a la acción, no comercial.",
+        " DOCUMENTOS_ADJUNTOS: lista detallada de documentos relacionados con la ficha (p. ej., Convocatoria, Solicitud, Edicto, etc.) usando la nomenclatura: \"<Tipo> de <nombre genérico> de <Administración>\".",
+        "No añadir otros subapartados; título exacto 'Otros datos'."
+      ]
+    }
+  },
+  "validaciones_transversales": {
+    "generales": [
+      "Mantener todos los campos del modelo oficial salvo que no existan datos.",
+      "Verificar BDNS en la web oficial antes de consignarla."
+    ],
+    "iprem_smi_irsc": {
+      "descripcion": "Inserción automática y única del indicador económico vigente cuando se mencione en las fuentes.",
+      "prioridad_de_campo": ["beneficiarios","requisitos_acceso","descripcion","plazo_presentacion","cuantia","importe_maximo","documentos_presentar"],
+      "fuente_valores": "valores_referencia_2025",
+      "regla": "Si la fuente menciona IPREM/SMI/IRSC, añadir SOLO la línea correspondiente (formato literal de valores_referencia_2025) en el campo de mayor prioridad disponible."
+    },
+    "boletines_oficiales": {
+      "descripcion": "Única validación para permitir completar 'Normativa reguladora' solo con boletines verificados.",
+      "pasos": [
+        {
+          "paso": 1,
+          "check": "¿El documento cargado es boletín oficial (BOP/BOE/boletín autonómico) con cabecera reconocible?",
+          "metodo": "OCR/patrones ('BOLETÍN OFICIAL') o metadatos PDF (firma oficial).",
+          "accion_no": "Bloquear 'Normativa reguladora' e insertar: 'Extracto pendiente de publicación oficial'."
+        },
+        {
+          "paso": 2,
+          "check": "¿Constan número y fecha exactos del boletín?",
+          "formato_requerido": "BOP (provincia) núm. (número), (dd/mm/aaaa)",
+          "accion_no": "No completar el campo y registrar advertencia para editor."
+        },
+        {
+          "paso": 3,
+          "check": "¿Es un documento no boletín (resolución/decreto/anuncio) que solo CITA un BOP?",
+          "accion_si": "Excluir completamente 'Normativa reguladora' y mostrar aviso contextual: 'Este documento no es un boletín oficial. El campo de normativa ha sido bloqueado automáticamente.'"
+        },
+        {
+          "paso": 4,
+          "check": "Estructura de lista válida ('Extracto', 'Convocatoria', 'Bases', 'Otros acuerdos').",
+          "accion": "Validar o ajustar forma textual según plantilla."
+        }
+      ],
+      "metadatos_necesarios": ["tipo_documento","cabecera_boletin_detectada","numero_bop","fecha_bop"]
+    }
+  },
+  "formato_cuantia": {
+    "presentacion": "Lista ordenada o texto corrido; no usar tablas.",
+    "importes": "coma decimal, dos decimales, símbolo € al final",
+    "orden": "lógico (menor→mayor) o por tramos/modalidades",
+    "subtitulos": true,
+    "plantilla": [
+      "- Tramo 1 … 50 % … 500,00 €",
+      "- Tramo 2 … 75 % … 750,00 €"
+    ]
+  },
+  "orden_campos_modelo": [
+    "Nombre de la ayuda","Portales","Categoría","Tipo de ayuda",
+    "Fecha inicio","Fecha fin","Fecha publicación en la BDNS o en el Boletín Oficial",
+    "Ámbito territorial","Administración","Plazo de presentación",
+    "Requisitos de acceso","Beneficiarios/Destinatarios","Descripción",
+    "Cuantía","Importe máximo","Resolución","Documentos a presentar",
+    "Costes no Subvencionables","Criterios de Concesión",
+    "Normativa Reguladora","Referencia Legislativa",
+    "Lugar y forma de presentación (Presencialmente en / Electrónicamente en)",
+    "Otros datos (USUARIO, FECHA, FRASE PARA PUBLICITAR)"
+  ],
+  "valores_referencia_2025": {
+    "iprem": { "dia": "20,00 €", "mes": "600,00 €", "anio_12_pagas": "7.200,00 €", "anio_14_pagas": "8.400,00 €" },
+    "smi": { "dia": "39,47 €", "mes": "1.184,00 €", "anio_14_pagas": "16.576,00 €" },
+    "irsc_cataluna": { "mes": "778,49 €", "anio": "9.341,92 €" }
+  },
+  "errores_frecuentes": [
+    "Cuantía sin '…' como separador visual o importes sin coma decimal/€.",
+    "Encabezados rígidos de cuantía que no existen en la norma (no adaptar).",
+    "Volcar texto en la columna CAMPO en lugar de CONCEPTO en el modelo.",
+    "Duplicar contenido entre Beneficiarios y Requisitos.",
+    "Mezclar importes de 'Cuantía' dentro de 'Descripción'."
+  ],
+  "checklist_final": {
+    "estilo": [
+      "Voz activa y frases cortas.",
+      "Léxico claro; tecnicismos explicados.",
+      "Campos en **negrita** seguidos de dos puntos.",
+      "Sin inventar datos.",
+      "Texto plano (sin tablas salvo 'Cuantía')."
+    ],
+    "cuantia": [
+      "Lista o texto corrido, sin tablas.",
+      "Importes con coma decimal, dos decimales y €.",
+      "Orden lógico y subtítulos cuando proceda.",
+      "No incluir importe total de la subvención."
+    ],
+    "validaciones": [
+      "BDNS verificada.",
+      "Si hay IPREM/SMI/IRSC, insertado 1 sola vez en el campo de mayor prioridad.",
+      "Si el documento no es boletín oficial, 'Normativa reguladora' bloqueada."
+    ]
+  },
+  "tipos_ayuda_referencia": [
+    "Accesibilidad","Acogimiento","Alimentación","Atención temprana","Básicas",
+    "Bonificación impuestos","Carnet de Conducir","Catástrofes","Complementarias Dependencias",
+    "Conciliación","Cultura - Ocio","Discapacidad","Emigrantes","Energía","Enseres","Estudios",
+    "Familia","Funcionarios","Ingreso Mínimo Vital","Natalidad","Paliativos","Reclusos","Rentas",
+    "Salud","Servicios","Técnicas","Tecnología","Termalismo","Trabajo - Emprendimiento","Transporte",
+    "Viajes","Violencia de Género","Vivienda"
+  ]
+}

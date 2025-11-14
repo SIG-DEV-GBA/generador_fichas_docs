@@ -1,0 +1,41 @@
+{
+  "nombre_ayuda": "[Resume el título oficial en Lenguaje Claro; incluye año si procede]",
+  "portales": ["Familia"],
+  "categoria": ["Vivienda"],
+  "tipo_ayuda": "Vivienda",
+  "fecha_inicio": "01/01/2025",
+  "fecha_fin": "31/12/2025",
+  "fecha_publicacion": "15/12/2024",
+  "ambito_territorial": "",
+  "administracion": "",
+  "plazo_presentacion": "El plazo permanecerá abierto hasta 31/12/2025",
+  "requisitos_acceso": "[Generales y específicos; añadir IPREM/SMI/IRSC si no está en Beneficiarios]",
+  "beneficiarios": "[Describe colectivo; si aplica IPREM (20,00 € día / 600,00 € mes / 7.200,00 € año / 8.400,00 € 14 pagas), SMI (39,47 € día / 1.184,00 € mes / 16.576,00 € año) o IRSC Cataluña (778,49 € mes / 9.341,92 € año), inclúyelo aquí]",
+  "descripcion": "[Finalidad, modalidades, gastos cubiertos, modo de pago e incompatibilidades; sin importes]",
+  "cuantia": [
+    "Tramo 1: xx % - xxx,00 €",
+    "Tramo 2: yy % - yyy,00 €"
+  ],
+  "importe_maximo": "[Máximo por solicitante y modalidad]",
+  "resolucion": "[Plazo máximo y silencio administrativo]",
+  "documentos_presentar": ["DNI."],
+  "costes_no_subvencionables": "",
+  "criterios_concesion": "",
+  "normativa_reguladora": ["Normativa reguladora 2025. BOP Aragón núm. 45, 15/02/2025."],
+  "referencia_legislativa": ["Ley 38/2003, General de Subvenciones."],
+  "lugar_presentacion": {
+    "presencial": ["Oficinas municipales."],
+    "electronica": ["https://sede.ejemplo.org/tramite"]
+  },
+  "otros_datos": {
+    "USUARIO": "",
+    "FECHA": "12/08/2025",
+    "FRASE_PARA_PUBLICITAR": ["Solicita tu ayuda en la sede electrónica."],
+    "DOCUMENTOS_ADJUNTOS": [
+      "Convocatoria de ayudas de [ámbito] de [Administración]",
+      "Extracto de ayudas de [ámbito] de [Administración]",
+      "Bases Reguladoras de [nombre genérico] de [Administración]",
+      "Solicitud de [ayuda] de [Administración]"
+    ]
+  }
+}
